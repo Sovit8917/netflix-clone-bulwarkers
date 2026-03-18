@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 export type Theme = {
   id: string;
@@ -76,7 +82,6 @@ export const THEMES: Theme[] = [
     logo: "#90A4AE",
     btnText: "#ffffff",
   },
-
   {
     id: "midnight-black",
     name: "Midnight",
@@ -154,6 +159,14 @@ const ThemeContext = createContext<ThemeContextType | null>(null);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(THEMES[0]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty("--color-accent", theme.accent);
+    root.style.setProperty("--color-accent-hover", theme.accentHover);
+    root.style.setProperty("--color-logo", theme.logo);
+    root.style.setProperty("--color-btn-text", theme.btnText);
+  }, [theme]);
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme, themes: THEMES }}>
       {children}
@@ -161,10 +174,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   );
 }
 
-
-
 export function useTheme(): ThemeContextType {
   const ctx = useContext(ThemeContext);
   if (!ctx) throw new Error("useTheme must be used inside ThemeProvider");
-  return ctx; 
+  return ctx;
 }

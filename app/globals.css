@@ -1,20 +1,36 @@
-
-
 @import "tailwindcss";
 
-
 :root {
-  --primary: #e50914;
-  --text: #ffffff;
+  --color-accent: #e50914;
+  --color-accent-hover: #c11119;
+  --color-logo: #e50914;
+  --color-btn-text: #ffffff;
 }
 
-/* reusable theme button */
-.btn-theme {
-  background-color: var(--primary);
-  color: var(--text);
-  transition: 0.3s ease;
+.bg-accent {
+  background-color: var(--color-accent);
 }
 
-.btn-theme:hover {
-  opacity: 0.85;
+.hover\:bg-accent-hover:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.text-btn {
+  color: var(--color-btn-text);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.fill-logo {
+  fill: var(--color-logo);
+}
+
+.border-accent {
+  border-color: var(--color-accent);
+}
+
+.focus\:border-accent:focus {
+  border-color: var(--color-accent);
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // ✅ change here
+import { Inter } from "next/font/google"; 
 import "./globals.css";
+import { ThemeProvider } from "@/context/ThemeContext";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,9 +20,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        {children}
+    <html data-theme="light" lang="en">
+      <body  className={`${inter.className} antialiased`}>
+        <ThemeProvider>  
+          <Navbar />
+                {children}
+          </ThemeProvider>
+
       </body>
     </html>
   );
